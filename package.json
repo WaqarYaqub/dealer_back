@@ -19,6 +19,7 @@
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^10.0.0",
     "mongodb": "^4.1.4",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "webpack": "^5.74.0"
   }
 }
