@@ -308,7 +308,7 @@ async function run() {
         //   await client.close();
     }
 }
-run();
+run().catch(console.dir(app.path()))
 
 
 
@@ -319,6 +319,10 @@ run();
 app.get('/', (req, res) => {
     console.log('Hitting backend');
     res.send('Car App Backend Coming Soon')
+})
+
+app.get('/test', (req, res) => {
+    res.send('Hi Waqar')
 })
 
 app.listen(port, () => {
