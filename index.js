@@ -307,14 +307,13 @@ async function run() {
         //   await client.close();
     }
 }
-// run().catch(console.dir);
+run();
 
 
 
 
 
 
-app.run();
 
 app.get('/', (req, res) => {
     console.log('Hitting backend');
