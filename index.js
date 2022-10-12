@@ -303,7 +303,7 @@ app.get("/dashboard-data", verifyToken, async (req, res) => {
 
 app.get("/", (req, res) => {
   console.log("Hitting backend");
-  res.send("Car App Backend Coming Soon");
+  res.send("Car App Backend Coming Soon", process.env.DB_USER);
 });
 
 app.get("/test", (req, res) => {
