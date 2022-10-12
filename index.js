@@ -1,6 +1,6 @@
 //Imports
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config();
 const ObjectId = require("mongodb").ObjectId;
@@ -32,6 +32,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
 });
 
 //Function to verify user using JWT token
@@ -47,16 +48,21 @@ async function verifyToken(req, res, next) {
   next();
 }
 
-async function run() {
-  try {
-    await client.connect();
-    await client.connect();
-  } finally {
-    //   await client.close();
-  }
-}
-run().catch(console.dir(app.path()));
+try {
+  client.connect();
+  // client.connect(err => {
+  //     // perform actions on the collection object
+  //     client.close();
+  //   });
+} catch (err) {
+  client.close();
 
+  console.log(err, "err");
+} finally {
+  client.close();
+}
+
+// await client.connect();
 const database = client.db("fullStackCarApp");
 const carsCollection = database.collection("cars");
 const usersCollection = database.collection("users");
@@ -301,11 +307,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  res.send("Hi Waqar");
+  res.send("Hi Waaqar");
 });
 
 app.listen(port, () => {
   console.log("Listening to port number ", port);
 });
-
-module.exports = app;

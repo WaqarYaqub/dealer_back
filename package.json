@@ -18,9 +18,10 @@
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^10.0.0",
     "mongodb": "^4.1.4",
+    "mongoose": "^6.6.5",
     "nodemon": "^2.0.15"
   },
-   "engines": {
+  "engines": {
     "node": "v14.20.0"
   }
 }
