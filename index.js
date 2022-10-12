@@ -227,11 +227,11 @@ app.get("/reviews", async (req, res) => {
   res.json(result);
 });
 
-app.post("/reviews", async (req, res) => {
-  const review = req.body;
-  const result = await reviewsCollection.insertOne(review);
-  res.json(result);
-});
+// app.post("/reviews", async (req, res) => {
+//   const review = req.body;
+//   const result = await reviewsCollection.insertOne(review);
+//   res.json(result);
+// });
 
 //DELETE API to delete review from reviews collection by admin
 app.delete("/reviews/:id", async (req, res) => {
@@ -307,7 +307,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  res.send("Hi Waaqar");
+  res.send("Hi Waaqar how");
 });
 
 app.listen(port, () => {
