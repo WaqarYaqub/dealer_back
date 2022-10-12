@@ -19,5 +19,8 @@
     "firebase-admin": "^10.0.0",
     "mongodb": "^4.1.4",
     "nodemon": "^2.0.15"
+  },
+   "engines": {
+    "node": "v14.20.0"
   }
 }
