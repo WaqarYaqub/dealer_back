@@ -314,7 +314,7 @@ async function run() {
 
 
 
-run();
+app.run();
 
 app.get('/', (req, res) => {
     console.log('Hitting backend');
@@ -325,3 +325,4 @@ app.listen(port, () => {
     console.log('Listening to port number ', port);
 })
 
+module.exports = app;
