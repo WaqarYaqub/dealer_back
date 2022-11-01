@@ -29,7 +29,8 @@ console.log(process.env.DB_USER, "process.env.DB_USER");
 //MongoDB
 // const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7qft9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.djx64nr.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(process.env.MONGODB_URI, {
+// const client = new MongoClient(process.env.MONGODB_URI, {
+const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
@@ -68,6 +69,7 @@ const carsCollection = database.collection("cars");
 const usersCollection = database.collection("users");
 const ordersCollection = database.collection("orders");
 const reviewsCollection = database.collection("reviews");
+const sellCarsCollection = database.collection("sellCars");
 
 //Get all cars
 app.get("/cars", async (req, res) => {
@@ -210,6 +212,34 @@ app.post("/orders", async (req, res) => {
     result = await ordersCollection.insertOne(order);
   }
   res.json(result);
+});
+
+app.post("/seller-cars", async (req, res) => {
+  const sellCar = req.body;
+  const result = await sellCarsCollection.insertOne(sellCar);
+  res.json(result);
+});
+
+app.get("/seller-cars",async (req, res) => {
+  const userEmail = req.query.email;
+    console.log("Hello");
+    const query = { sellerEmail: userEmail };
+    const cursor = sellCarsCollection.find(query);
+    const cardDetails = await cursor.toArray();
+    res.json(cardDetails);
+});
+
+app.get("/seller-orders", async (req, res) => {
+  const userEmail = req.query.email;
+  console.log(req.query,"qury")
+  if(userEmail){
+  const query = { sellerEmail: userEmail };
+  const cursor = ordersCollection.find(query);
+  const orderDetails = await cursor.toArray();
+  res.json(orderDetails);
+  }else{
+    res.status(401).json({ message: "User Not Authorized" });
+  }
 });
 
 //DELETE API to delete user orders
