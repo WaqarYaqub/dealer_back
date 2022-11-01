@@ -220,6 +220,17 @@ app.post("/seller-cars", async (req, res) => {
   res.json(result);
 });
 
+app.put("/becomeSeller/:email", async (req, res) => {
+  const filter = { email: req.params.email };
+  const updateDoc = {
+    $set: {
+      isSeller: true,
+    },
+  };
+  const result = await usersCollection.updateOne(filter, updateDoc);
+  res.json(result);
+});
+
 app.get("/seller-cars",async (req, res) => {
   const userEmail = req.query.email;
     console.log("Hello");
