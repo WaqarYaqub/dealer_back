@@ -223,9 +223,7 @@ app.post("/seller-cars", async (req, res) => {
 app.put("/becomeSeller/:email", async (req, res) => {
   const filter = { email: req.params.email };
   const updateDoc = {
-    $set: {
-      isSeller: true,
-    },
+    $set: req.body
   };
   const result = await usersCollection.updateOne(filter, updateDoc);
   res.json(result);
